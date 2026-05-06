@@ -1,0 +1,29 @@
+# Ghostty configuration.
+# Docs: https://ghostty.org/docs/config/reference
+
+# --- Appearance ---
+font-family            = JetBrainsMono Nerd Font
+font-size              = 14
+theme                  = "Tokyo Night"
+background-opacity     = 0.97
+window-padding-x       = 12
+window-padding-y       = 10
+window-decoration      = true
+cursor-style           = block
+cursor-style-blink     = false
+
+# --- Behavior ---
+window-inherit-working-directory = true
+copy-on-select                   = true
+confirm-close-surface            = false
+shell-integration                = zsh
+shell-integration-features       = cursor,sudo,title
+
+# macOS-specific
+macos-option-as-alt = true
+
+# --- Keybinds: native macOS text editing ---
+keybind = cmd+left=text:\x1b[H
+keybind = cmd+right=text:\x1b[F
+keybind = cmd+backspace=text:\x15
+keybind = shift+enter=text:\x1b[27;2;13~

@@ -1,0 +1,4 @@
+# Machine-specific overrides. Copy to lib/99-local.zsh — gitignored.
+# Examples:
+# export FOO=bar
+# alias work='cd ~/work'

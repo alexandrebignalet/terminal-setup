@@ -1,0 +1,4 @@
+backups/
+lib/99-local.zsh
+.DS_Store
+.claude/

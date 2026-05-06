@@ -1,0 +1,30 @@
+[user]
+	email = alexandre.bignalet@gmail.com
+	name = Alexandre BIGNALET
+[init]
+	defaultBranch = main
+[core]
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	light    = false
+	side-by-side = true
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
+[pull]
+	rebase = false
+[http]
+	version = HTTP/1.1
+[filter "lfs"]
+	smudge   = git-lfs smudge -- %f
+	process  = git-lfs filter-process
+	required = true
+	clean    = git-lfs clean -- %f
+[safe]
+	directory = /opt/homebrew

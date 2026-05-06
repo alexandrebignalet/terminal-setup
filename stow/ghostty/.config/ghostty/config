@@ -4,7 +4,7 @@
 # --- Appearance ---
 font-family            = JetBrainsMono Nerd Font
 font-size              = 14
-theme                  = "Tokyo Night"
+theme                  = "TokyoNight Night"
 background-opacity     = 0.97
 window-padding-x       = 12
 window-padding-y       = 10

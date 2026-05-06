@@ -18,6 +18,8 @@ migration post](https://gordonbeeming.com/blog/2026-03-06/i-let-claude-migrate-m
 | Fuzzy completion | [fzf-tab](https://github.com/Aloxaf/fzf-tab) |
 | Dotfiles         | [GNU Stow](https://www.gnu.org/software/stow/) symlinks |
 
+**See [`docs/USAGE.md`](docs/USAGE.md) for tool-by-tool usage with concrete examples.**
+
 ## Quick start (new Mac)
 
 ```bash

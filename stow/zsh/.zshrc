@@ -28,7 +28,11 @@ zinit snippet OMZP::git           # 200+ git aliases (gst, gco, gcm, etc.)
 zinit snippet OMZP::sudo          # ESC ESC to prepend sudo
 
 # Load completions
-autoload -Uz compinit && compinit
+# Per-user completions dir (populated by bootstrap.sh from foreign-owned
+# brew symlinks — see step 2.5). Must be on fpath BEFORE compinit so its
+# entries take precedence; -i silently skips the still-flagged brew links.
+fpath=("$HOME/.local/share/zsh/site-functions" $fpath)
+autoload -Uz compinit && compinit -i
 zinit cdreplay -q
 
 # --- 4. fzf-tab styling ---

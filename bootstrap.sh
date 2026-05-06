@@ -59,6 +59,32 @@ else
   log "Skipping brew bundle"
 fi
 
+# --- 2.5. Mirror foreign-owned zsh completions into a per-user dir ---
+# This Mac has two macOS accounts. Brew under one account symlinks to files
+# inside an .app owned by the other account, which compaudit refuses. We
+# resolve those symlinks into real-file copies under $HOME (owned by the
+# running user) and prepend that dir to fpath in .zshrc, so completions
+# still load and `compinit -i` can silently skip the foreign brew symlinks.
+USER_FPATH_DIR="$HOME/.local/share/zsh/site-functions"
+mkdir -p "$USER_FPATH_DIR"
+SITE_FN_DIR="$("$BREW" --prefix)/share/zsh/site-functions"
+if [[ -d "$SITE_FN_DIR" ]]; then
+  ME="$(id -u)"
+  mirrored=0
+  for link in "$SITE_FN_DIR"/*; do
+    [[ -L "$link" ]] || continue
+    target="$(readlink -f "$link" 2>/dev/null)" || continue
+    [[ -f "$target" ]] || continue
+    owner="$(stat -f '%u' "$target")"
+    [[ "$owner" == "$ME" || "$owner" == "0" ]] && continue
+    name="$(basename "$link")"
+    cp "$target" "$USER_FPATH_DIR/$name"
+    chmod u+rw,go-w "$USER_FPATH_DIR/$name"
+    mirrored=$((mirrored + 1))
+  done
+  [[ "$mirrored" -gt 0 ]] && log "Mirrored $mirrored foreign-owned completion(s) → $USER_FPATH_DIR"
+fi
+
 # --- 3. Backup live dotfiles before stow ---
 log "Backing up live dotfiles → $BACKUP_DIR"
 mkdir -p "$BACKUP_DIR/dotfiles"
